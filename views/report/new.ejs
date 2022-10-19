@@ -1,0 +1,48 @@
+<% layout('layout/boilerplate') %>
+    <div class="card">
+        <div class="card-header bg-secondary text-light">
+            Create Post
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <form action="/reports" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" placeholder="Title" name="report[title]"
+                            required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="report[description]" rows="3"
+                            placeholder="Description" required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select class="form-select" id="category" aria-label="Default select example"
+                            name="report[category]" required>
+                            <% for (let category of categories) { %>
+                                <option value=<%=category %>><%= category %>
+                                </option>
+                                <% } %>
+                        </select>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">Image Upload <span class="text-muted">(Images should be less than or equal to five)</span></label>
+                        <input class="form-control" type="file" id="formFileMultiple" name="image" multiple>
+                    </div>
+                    <div class="d-grid mb-3">
+                        <button class="btn btn-outline-dark">Submit</button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>

@@ -1,0 +1,61 @@
+<div class="card mb-3">
+    <div class="card-header bg-secondary text-light">
+        About
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item d-grid gap-2">
+            Unexplained is an online forum dedicated to the discussion of sightings of paranormal            
+            entities, UFOs, the possibility of extraterrestrial life and other strange events             
+            that cannot be explained.
+        </li>
+    </ul>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header bg-secondary text-light">
+        Categories
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item d-grid gap-2">
+            <a class="btn  <%= currentCategory === 'Paranormal' ? 'btn-secondary' : 'btn-outline-secondary' %>" type="button" href="/reports?category=Paranormal">Paranormal</a>
+        </li>
+        <li class="list-group-item d-grid gap-2">
+            <a class="btn  <%= currentCategory === 'UFO/Aliens' ? 'btn-secondary' : 'btn-outline-secondary' %>" type="button" href="/reports?category=UFO/Aliens">UFO/Aliens</a>
+        </li>
+        <li class="list-group-item d-grid gap-2">
+            <a class="btn <%= currentCategory === 'Others' ? 'btn-secondary' : 'btn-outline-secondary' %> " type="button" href="/reports?category=Others">Others</a>
+        </li>
+    </ul>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header bg-secondary text-light">
+        Rules
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            1.Follow the standards of civility
+        </li>
+        <li class="list-group-item">
+            2.Posts must be on-topic
+        </li>
+        <li class="list-group-item">
+            3.No low effort posts or comments
+        </li>
+        <li class="list-group-item">
+            4.No duplicate posts
+        </li>
+        <li class="list-group-item">
+            5.No advertising
+        </li>
+        <li class="list-group-item">
+            6.No memes
+        </li>
+    </ul>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p class="card-text">Unexplained Inc &copy; 2022. All rights reserved</p>
+    </div>
+</div>
