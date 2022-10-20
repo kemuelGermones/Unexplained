@@ -19,10 +19,11 @@ const reportRoute = require('./routes/report');
 const commentRoute = require('./routes/comment');
 const userRoute = require('./routes/user');
 const helmet = require("helmet");
+const MongoStore = require('connect-mongo');
 
 // Mongoose Connection
 
-const dbUrl = 'mongodb://localhost:27017/anomalies';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/anomalies';
 mongoose.connect(dbUrl);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -82,11 +83,21 @@ app.use(
     }),
 );
 
+// Connect mongo config
+
+const secret = process.env.SECRET || 'thisshouldbeasecret';
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    secret,
+    ttl: 24 * 60 * 60
+});
+
 // Session Configuration
 
 const sessionConfig = {
+    store,
     name: '__uINmw',
-    secret: 'thisshouldbeasecret',
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -144,6 +155,7 @@ app.use((err, req, res, next) => {
 
 // listens for connections on the given path
 
-app.listen(3000, () => {
-    console.log('Listening to Port 3000');
+const port = process.env.PORT || 3000
+app.listen(port, () => {
+    console.log('Listening to Port ' + port);
 });
