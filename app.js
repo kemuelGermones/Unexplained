@@ -136,7 +136,6 @@ app.use((req, res, next) => {
 
 // Routes
 
-app.get('/favicon.ico', (req, res) => res.status(204));
 app.use('/', userRoute);
 app.use('/reports', reportRoute);
 app.use('/reports/:id/comments', commentRoute);
@@ -156,7 +155,7 @@ app.use((err, req, res, next) => {
 
 // listens for connections on the given path
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log('Listening to Port ' + port);
 });
