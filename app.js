@@ -136,6 +136,7 @@ app.use((req, res, next) => {
 
 // Routes
 
+app.get('/favicon.ico', (req, res) => res.status(204));
 app.use('/', userRoute);
 app.use('/reports', reportRoute);
 app.use('/reports/:id/comments', commentRoute);
