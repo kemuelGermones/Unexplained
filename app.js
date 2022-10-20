@@ -32,11 +32,27 @@ db.once('open', () => {
 
 // Helmet middleware for security
 
-app.use(helmet({
-    contentSecurityPolicy: false,
-    crossOriginEmbedderPolicy: false,
-    // crossOriginResourcePolicy: false,
-}));
+app.use(
+    helmet.contentSecurityPolicy({
+        directives: {
+            defaultSrc: [],
+            connectSrc: ["'self'"],
+            scriptSrc: ["'unsafe-inline'", "'self'", 'https://cdn.jsdelivr.net'],
+            styleSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net'],
+            workerSrc: ["'self'", "blob:"],
+            childSrc: ["blob:"],
+            objectSrc: [],
+            imgSrc: [
+                "'self'",
+                "blob:",
+                "data:",
+                `https://res.cloudinary.com/${ process.env.CLOUDINARY_CLOUD_NAME }/`, 
+                "https://images.pexels.com",
+            ],
+            fontSrc: ["'self'", 'https://cdn.jsdelivr.net'],
+        },
+    })
+);
 
 // Template engine
 
