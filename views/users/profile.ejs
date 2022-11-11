@@ -1,53 +1,58 @@
 <% layout('layout/boilerplate') %>
-    <div class="card mb-3">
-        <div class="card-body">
-            <h1 class="card-title">
-                <%= user.username %>
-            </h1>
-            <p class="card-text">
-                <%= user.email %>
-            </p>
-        </div>
-        <ul class="list-group list-group-flush">
-            <% if (currentUser && user.equals(currentUser)) { %> 
-                <li class="list-group-item">Your posts:</li>
-            <% } else { %>
-                <li class="list-group-item"><%= user.username %> posts:</li>
-            <% } %> 
-        </ul>
+<div class="card mb-3">
+  <div class="card-body">
+    <h1 class="card-title"><%= user.username %></h1>
+    <p class="card-text"><%= user.email %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <% if (currentUser && user.equals(currentUser)) { %>
+    <li class="list-group-item">Your posts:</li>
+    <% } else { %>
+    <li class="list-group-item"><%= user.username %> posts:</li>
+    <% } %>
+  </ul>
+</div>
+<% for (let report of reports) { %>
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="bg-secondary">
+      <% if (report.images.length) { %>
+      <img
+        src="<%= report.images[0].thumbnail %>"
+        class="d-block mx-auto img-fluid"
+        alt="..."
+      />
+      <% } %>
     </div>
-    <% for (let report of reports) { %>
-        <div class="card mb-3">
-            <div class="card-body">
-                <div class="bg-secondary">
-                    <% if (report.images.length) { %> 
-                      <img src="<%= report.images[0].thumbnail %>" class="d-block mx-auto img-fluid" alt="...">
-                     <% } %> 
-                  </div>
-                  <h5 class="card-title mt-2"><a href="/reports/<%= report._id %>">
-                    <%= report.title %>
-                  </a></h5>
-                  <p class="card-text">
-                    <%= report.description %>
-                  </p>
-                  <p class="card-text text-muted">Posted by: <%= report.author.username %>
-                  </p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item text-muted">Comments: <%= report.comments.length %>
-              </li>
-              <li class="list-group-item text-muted">Category: <%= report.category %>
-              </li>
-              <% if (currentUser && report.author.equals(currentUser)) { %>
-                <li class="list-group-item">
-                  <a href="/reports/<%= report._id %>/edit" class="btn btn btn-outline-secondary"><i class="bi bi-pencil"></i> Edit</a>
-                  <form action="/reports/<%= report._id %>?_method=DELETE" method="POST" class="d-inline">
-                    <button class="btn btn btn-outline-secondary"><i class="bi bi-trash"></i> Delete</button>
-                  </form>
-                </li>
-                <% } %>
-            </ul>
-          </div>
-    <% } %>  
-
-    
+    <h5 class="card-title mt-2">
+      <a href="/reports/<%= report._id %>"> <%= report.title %> </a>
+    </h5>
+    <p class="card-text"><%= report.description %></p>
+    <p class="card-text text-muted">Posted by: <%= report.author.username %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item text-muted">
+      Comments: <%= report.comments.length %>
+    </li>
+    <li class="list-group-item text-muted">Category: <%= report.category %></li>
+    <% if (currentUser && report.author.equals(currentUser)) { %>
+    <li class="list-group-item">
+      <a
+        href="/reports/<%= report._id %>/edit"
+        class="btn btn btn-outline-secondary"
+        ><i class="bi bi-pencil"></i> Edit</a
+      >
+      <form
+        action="/reports/<%= report._id %>?_method=DELETE"
+        method="POST"
+        class="d-inline"
+      >
+        <button class="btn btn btn-outline-secondary">
+          <i class="bi bi-trash"></i> Delete
+        </button>
+      </form>
+    </li>
+    <% } %>
+  </ul>
+</div>
+<% } %>
