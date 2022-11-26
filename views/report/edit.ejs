@@ -30,10 +30,8 @@
             id="description"
             name="report[description]"
             rows="3"
-            required
-          >
-<%= report.description %></textarea
-          >
+            required><%= report.description %>
+          </textarea>
           <div class="valid-feedback">Looks good!</div>
         </div>
         <div class="mb-3">
@@ -46,9 +44,10 @@
             required
           >
             <% for (let category of categories) { %>
-            <option value="<%" ="category" %>
-              <%= category===report.category ? 'selected' : '' %>> <%= category
-              %>
+            <option value="<%= category %>"
+              <%= category === report.category ? 'selected' : '' %>
+            >
+              <%= category %>
             </option>
             <% } %>
           </select>
