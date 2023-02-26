@@ -8,9 +8,9 @@ Unexplained is an online forum dedicated to the discussion of sightings of paran
 
 ### Description
 
-This is an online forum application built with Node.js, Express.js and MongoDB 
-where users can view posts from different categories. 
-Registed users can also create, edit and delete their own posts and comments. 
+This is an online forum application built with Node.js, Express.js and MongoDB
+where users can view posts from different categories.
+Registed users can also create, edit and delete their own posts and comments.
 
 ### Requirements
 
@@ -18,6 +18,8 @@ Registed users can also create, edit and delete their own posts and comments.
 - MongoDB
 
 ### Usage
+
+Navigate to the URL provided above to visit the live demo. Alternatively, if you want to host the web app locally on your computer, make sure to follow the instructions below.
 
 Clone it
 
@@ -47,4 +49,4 @@ Open http://localhost:3000 and enjoy!
 
 ### Future Plans
 
-- Make it responsive 
+- Make it responsive
