@@ -1,6 +1,6 @@
 # Unexplained
 
-Unexplained is an online forum dedicated to the discussion of sightings of paranormal entities, UFOs, the possibility of extraterrestrial life and other strange events that cannot be explain.
+This is an online forum web application that enables users to communicate with each other by posting messages and engaging in discussions on various topics like sightings of paranormal entities, UFOs, the possibility of extraterrestrial life and other strange events that cannot be explain.
 
 ### [Live Site](https://unexplained.vercel.app/)
 
@@ -8,9 +8,7 @@ Unexplained is an online forum dedicated to the discussion of sightings of paran
 
 ### Description
 
-This is an online forum application built with Node.js, Express.js and MongoDB
-where users can view posts from different categories.
-Registed users can also create, edit and delete their own posts and comments.
+Is an online forum web application built with Node, Express and MongoDB that enables users to communicate with each other by posting messages and engaging in discussions on various topics.
 
 ### Requirements
 
