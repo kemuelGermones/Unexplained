@@ -8,7 +8,7 @@ This is an online forum web application that enables users to communicate with e
 
 ### Description
 
-Is an online forum web application built with Node, Express and MongoDB that enables users to communicate with each other by posting messages and engaging in discussions on various topics.
+Unexplained is an online forum web application built with Node, Express and MongoDB that enables users to communicate with each other by posting messages and engaging in discussions on various topics.
 
 ### Requirements
 
