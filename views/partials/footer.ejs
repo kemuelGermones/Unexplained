@@ -12,30 +12,11 @@
 <div class="card mb-3">
   <div class="card-header bg-secondary text-light">Categories</div>
   <ul class="list-group list-group-flush">
+    <% for (let category of categories) { %>
     <li class="list-group-item d-grid gap-2">
-      <a
-        class="btn <%= currentCategory === 'Paranormal' ? 'btn-secondary' : 'btn-outline-secondary' %>"
-        type="button"
-        href="/reports?category=Paranormal"
-        >Paranormal</a
-      >
+      <a class="btn <%= currentCategory === category.name ? 'btn-secondary' : 'btn-outline-secondary' %>" type="button" href="<%= `/reports?category=${category.name}` %>"><%= category.name %></a>
     </li>
-    <li class="list-group-item d-grid gap-2">
-      <a
-        class="btn <%= currentCategory === 'UFO/Aliens' ? 'btn-secondary' : 'btn-outline-secondary' %>"
-        type="button"
-        href="/reports?category=UFO/Aliens"
-        >UFO/Aliens</a
-      >
-    </li>
-    <li class="list-group-item d-grid gap-2">
-      <a
-        class="btn <%= currentCategory === 'Others' ? 'btn-secondary' : 'btn-outline-secondary' %>"
-        type="button"
-        href="/reports?category=Others"
-        >Others</a
-      >
-    </li>
+    <% } %>
   </ul>
 </div>
 

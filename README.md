@@ -17,7 +17,7 @@ Unexplained is an online forum web application built with Node, Express and Mong
 
 ### Usage
 
-Navigate to the URL provided above to visit the live demo. Alternatively, if you want to host the web app locally on your computer, make sure to follow the instructions below.
+Navigate to the URL provided above to visit the live demo. Alternatively, if you want to host the web app locally on your computer, make sure to follow the instructions below and add your own local environment variables.
 
 Clone it
 

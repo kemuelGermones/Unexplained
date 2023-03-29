@@ -42,8 +42,8 @@ module.exports.isLoggedIn = (req, res, next) => {
 // Checks if the user is the owner of the report
 
 module.exports.isAuthor = async (req, res, next) => {
-  const { id } = req.params;
-  const report = await Report.findById(id);
+  const { reportId } = req.params;
+  const report = await Report.findById(reportId);
   if (!report.author.equals(req.user._id)) {
     req.flash("error", "You do not have permission to do that");
     return res.redirect("/reports");
@@ -54,11 +54,11 @@ module.exports.isAuthor = async (req, res, next) => {
 // Checks if the user is the owner of the comment
 
 module.exports.isCommentAuthor = async (req, res, next) => {
-  const { id, commentId } = req.params;
+  const { reportId, commentId } = req.params;
   const comment = await Comment.findById(commentId);
   if (!comment.author.equals(req.user._id)) {
     req.flash("error", "You do not have permission to do that");
-    return res.redirect(`/reports/${id}`);
+    return res.redirect(`/reports/${reportId}`);
   }
   next();
 };

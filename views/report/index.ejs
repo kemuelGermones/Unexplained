@@ -1,33 +1,25 @@
-<% layout('layout/reportPageBoilerplate') %>
+<% layout('layout/reportsPageBoilerplate') %>
 <div class="card mb-3">
   <div class="d-grid gap-2 card-body">
-    <a class="btn btn btn-outline-secondary" type="button" href="/reports/new"
-      >Create Post</a
-    >
+    <a class="btn btn btn-outline-secondary" type="button" href="/reports/new">Create Post</a>
   </div>
 </div>
 
 <% for (let value of report) { %>
 <div class="card mb-3">
   <div class="card-body">
-    <div class="bg-secondary">
-      <% if (value.images.length) { %>
-      <img
-        src="<%= value.images[0].thumbnail %>"
-        class="d-block mx-auto img-fluid"
-        alt="..."
-      />
-      <% } %>
+    <% if (value.images.length) { %>
+    <div class="bg-secondary mb-2">
+      <img src="<%= value.images[0].thumbnail %>" class="d-block mx-auto img-fluid" alt="..." />
     </div>
-    <h5 class="card-title mt-2">
+    <% } %>
+    <h5 class="card-title">
       <a href="/reports/<%= value._id %>"> <%= value.title %> </a>
     </h5>
     <p class="card-text"><%= value.description %></p>
     <p class="card-text text-muted">
       Posted by:
-      <a href="/profile/<%= value.author._id %>"
-        ><%= value.author.username %></a
-      >
+      <a href="/profile/<%= value.author._id %>"><%= value.author.username %></a>
     </p>
   </div>
   <ul class="list-group list-group-flush">

@@ -2,10 +2,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Comment = require("./comment");
 
+// Report image schema
+
 const imageSchema = new Schema({
   url: String,
   filename: String,
 });
+
+// Report image virtual
 
 imageSchema.virtual("thumbnail").get(function () {
   return this.url.replace("/upload", "/upload/w_650,h_350,c_fit");

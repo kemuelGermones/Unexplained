@@ -5,7 +5,7 @@ const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
 const { isLoggedIn } = require("../middleware");
 
-// login page route
+// Render login page route
 
 router.get("/", user.renderLoginForm);
 
@@ -21,11 +21,11 @@ router.post(
   user.loginUser
 );
 
-// Signup page route
+// Render signup page route
 
 router.get("/signup", user.renderSignupForm);
 
-// Signup user route
+// Register user route
 
 router.post("/signup", wrapAsync(user.signupUser));
 
@@ -33,7 +33,7 @@ router.post("/signup", wrapAsync(user.signupUser));
 
 router.get("/logout", user.logoutUser);
 
-// Profile overview route
+// Render profile page route
 
 router.get("/profile/:id", isLoggedIn, wrapAsync(user.profile));
 

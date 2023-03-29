@@ -1,31 +1,27 @@
 const Report = require("../models/report");
 const { cloudinary } = require("../cloudinary/index");
+const categories = require("../public/javascripts/categories");
 
-const categories = ["Paranormal", "UFO/Aliens", "Others"];
-
-// Render All Reports
+// Render reports page
 
 module.exports.renderReports = async (req, res, next) => {
   const { category } = req.query;
   if (category) {
-    if (categories.indexOf(category) < 0) {
+    if (categories.findIndex((val) => val.name === category) === -1) {
       req.flash("error", "Cannot find that category");
       return res.redirect("/reports");
     }
-    const report = await (
-      await Report.find({ category }).populate("author")
-    ).reverse();
-    res.render("report/index.ejs", { report, category });
-  } else {
-    const report = await (await Report.find({}).populate("author")).reverse();
-    res.render("report/index.ejs", { report, category: "All" });
+    const report = await Report.find({ category }).populate("author");
+    return res.render("report/index.ejs", { report });
   }
+  const report = await Report.find().populate("author");
+  res.render("report/index.ejs", { report });
 };
 
-// Render New Report Form
+// Render new report page
 
-module.exports.renderNewReportForm = (req, res) => {
-  res.render("report/new.ejs", { categories });
+module.exports.renderNewReportForm = (req, res, next) => {
+  res.render("report/new.ejs");
 };
 
 // Create new report
@@ -33,24 +29,20 @@ module.exports.renderNewReportForm = (req, res) => {
 module.exports.createReport = async (req, res, next) => {
   const report = new Report(req.body.report);
   report.author = req.user._id;
-  report.images = req.files.map((f) => ({ url: f.path, filename: f.filename }));
-  if (report.images.length > 5) {
-    for (let file of report.images) {
-      cloudinary.uploader.destroy(file.filename);
-    }
-    req.flash("error", "Images should be less than or equal to five only");
-    return res.redirect("/reports/new");
-  }
+  report.images = req.files.map((file) => ({
+    url: file.path,
+    filename: file.filename,
+  }));
   await report.save();
   req.flash("success", "Successfully made a report");
   res.redirect("/reports");
 };
 
-// Show individual report
+// Render individual report page
 
 module.exports.showIndividualReport = async (req, res, next) => {
-  const { id } = req.params;
-  const report = await Report.findById(id)
+  const { reportId } = req.params;
+  const report = await Report.findById(reportId)
     .populate({
       path: "comments",
       populate: {
@@ -65,62 +57,57 @@ module.exports.showIndividualReport = async (req, res, next) => {
   res.render("report/show.ejs", { report });
 };
 
-// Render Edit Report Form
+// Render edit report page
 
 module.exports.renderEditForm = async (req, res, next) => {
-  const { id } = req.params;
-  const report = await Report.findById(id);
+  const { reportId } = req.params;
+  const report = await Report.findById(reportId);
   if (!report) {
     req.flash("error", "Cannot find that report");
     return res.redirect("/reports");
   }
-  res.render("report/edit.ejs", { report, categories });
+  res.render("report/edit.ejs", { report });
 };
 
 // Edit Report
 
 module.exports.editReport = async (req, res, next) => {
-  const { id } = req.params;
-  const report = await Report.findById(id);
-  if (req.body.deleteImages) {
-    for (let deleteFilename of req.body.deleteImages) {
-      cloudinary.uploader.destroy(deleteFilename);
-      report.images = report.images.filter(
-        (img) => img.filename !== deleteFilename
-      );
-    }
-  }
-  const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
-  const mergedImgs = [...report.images, ...imgs];
-  if (mergedImgs.length > 5) {
-    for (let file of imgs) {
-      cloudinary.uploader.destroy(file.filename);
-    }
-    req.flash(
-      "error",
-      "Total Images should be less than or equal to five only"
-    );
-    return res.redirect(`/reports/${id}`);
-  }
-  req.body.report.images = mergedImgs;
-  const editedReport = await Report.findByIdAndUpdate(id, {
+  const { reportId } = req.params;
+  const report = await Report.findByIdAndUpdate(reportId, {
     ...req.body.report,
   });
+  report.images.push(
+    ...req.files.map((file) => ({
+      url: file.path,
+      filename: file.filename,
+    }))
+  );
+  await report.save();
+  if (req.body.deleteImages) {
+    const deleteCloudinary = req.body.deleteImages.map((filename) =>
+      cloudinary.uploader.destroy(filename)
+    );
+    await Promise.all(deleteCloudinary);
+    await report.updateOne({
+      $pull: { images: { filename: { $in: req.body.deleteImages } } },
+    });
+  }
   req.flash("success", "Successfully edited a report");
-  res.redirect(`/reports/${id}`);
+  res.redirect(`/reports/${reportId}`);
 };
 
 // Delete Report
 
 module.exports.deleteReport = async (req, res, next) => {
-  const { id } = req.params;
-  const report = await Report.findById(id);
+  const { reportId } = req.params;
+  const report = await Report.findById(reportId);
   if (report.images.length) {
-    for (let file of report.images) {
-      await cloudinary.uploader.destroy(file.filename);
-    }
+    const deleteCloudinary = report.images.map((image) =>
+      cloudinary.uploader.destroy(image.filename)
+    );
+    await Promise.all(deleteCloudinary);
   }
-  await Report.findByIdAndDelete(id);
+  await Report.findByIdAndDelete(reportId);
   req.flash("success", "Successfully deleted a report");
   res.redirect("/reports");
 };

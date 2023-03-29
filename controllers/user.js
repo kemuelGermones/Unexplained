@@ -1,30 +1,30 @@
 const User = require("../models/user");
 const Report = require("../models/report");
 
-// Render login page & form
+// Render login page
 
-module.exports.renderLoginForm = async (req, res) => {
+module.exports.renderLoginForm = async (req, res, next) => {
   res.render("users/login.ejs");
 };
 
-// login the user
+// login user
 
-module.exports.loginUser = (req, res) => {
+module.exports.loginUser = (req, res, next) => {
   req.flash("success", "Welcome Back");
   const redirectUrl = req.session.returnTo || "/reports";
   res.redirect(redirectUrl);
   delete req.session.returnTo;
 };
 
-// Render signup poge & form
+// Render signup poge
 
-module.exports.renderSignupForm = (req, res) => {
+module.exports.renderSignupForm = (req, res, next) => {
   res.render("users/signup.ejs");
 };
 
-// Register/ signup the user
+// Register user
 
-module.exports.signupUser = async (req, res) => {
+module.exports.signupUser = async (req, res, next) => {
   try {
     const { email, username, password } = req.body;
     const user = new User({ email, username });
@@ -40,7 +40,7 @@ module.exports.signupUser = async (req, res) => {
   }
 };
 
-// Logout the user
+// Logout user
 
 module.exports.logoutUser = (req, res, next) => {
   req.logout((err) => {
@@ -50,13 +50,11 @@ module.exports.logoutUser = (req, res, next) => {
   });
 };
 
-// Profile
+// Render profile page
 
 module.exports.profile = async (req, res, next) => {
   const { id } = req.params;
   const user = await User.findById(id);
-  const reports = (
-    await Report.find({ author: id }).populate("author")
-  ).reverse();
+  const reports = await Report.find({ author: id }).populate("author");
   res.render("users/profile.ejs", { reports, user });
 };

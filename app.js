@@ -20,10 +20,11 @@ const commentRoute = require("./routes/comment");
 const userRoute = require("./routes/user");
 const helmet = require("helmet");
 const MongoStore = require("connect-mongo");
+const categories = require("./public/javascripts/categories");
 
 // Mongoose Connection
 
-const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/anomalies";
+const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/unexplained";
 mongoose.connect(dbUrl);
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -102,7 +103,7 @@ const sessionConfig = {
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    // secure: true, // WORKS FOR HTTPS ONLY
+    secure: true, // WORKS FOR HTTPS ONLY
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
@@ -127,6 +128,7 @@ passport.deserializeUser(User.deserializeUser());
 // Set variables accessible to templates
 
 app.use((req, res, next) => {
+  res.locals.categories = categories;
   res.locals.currentCategory = req.query.category;
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
@@ -138,7 +140,7 @@ app.use((req, res, next) => {
 
 app.use("/", userRoute);
 app.use("/reports", reportRoute);
-app.use("/reports/:id/comments", commentRoute);
+app.use("/reports/:reportId/comments", commentRoute);
 
 // New error if a route is not recognized
 

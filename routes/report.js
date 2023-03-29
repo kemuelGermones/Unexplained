@@ -7,15 +7,15 @@ const multer = require("multer");
 const { storage } = require("../cloudinary/index");
 const upload = multer({ storage });
 
-// Render All Reports route
+// Render reports page route
 
 router.get("/", wrapAsync(report.renderReports));
 
-// Render New Report Form route
+// Render new report page route
 
 router.get("/new", isLoggedIn, report.renderNewReportForm);
 
-// Create new report route
+// Create report route
 
 router.post(
   "/",
@@ -25,17 +25,18 @@ router.post(
   wrapAsync(report.createReport)
 );
 
-// Show individual report route
+// Render individual report page route
 
-router.get("/:id", wrapAsync(report.showIndividualReport));
+router.get("/:reportId", wrapAsync(report.showIndividualReport));
 
-// Render edit report form route
+// Render edit report page route
 
-router.get("/:id/edit", isLoggedIn, isAuthor, wrapAsync(report.renderEditForm));
+router.get("/:reportId/edit", isLoggedIn, isAuthor, wrapAsync(report.renderEditForm));
 
 // Edit report route
+
 router.put(
-  "/:id",
+  "/:reportId",
   isLoggedIn,
   isAuthor,
   upload.array("image"),
@@ -45,6 +46,6 @@ router.put(
 
 // Delete report route
 
-router.delete("/:id", isLoggedIn, isAuthor, wrapAsync(report.deleteReport));
+router.delete("/:reportId", isLoggedIn, isAuthor, wrapAsync(report.deleteReport));
 
 module.exports = router;
