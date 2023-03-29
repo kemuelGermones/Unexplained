@@ -7,8 +7,8 @@ module.exports = [
     url: "https://images.pexels.com/photos/626164/pexels-photo-626164.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {
-    name: "UFO/Aliens",
-    description: "A UFO/Aliens category discussion is a conversation that centers on topics related to extraterrestrial life and unidentified flying objects. Participants in this discussion may discuss reported sightings of UFOs, share personal experiences or theories about possible alien visitations, or explore the scientific and philosophical implications of the existence of intelligent life beyond our planet. The discussion may also delve into government secrecy and cover-up theories surrounding UFO sightings and encounters. This type of discussion can be both intriguing and controversial, inviting individuals to consider the possibilities of what lies beyond our planet and challenging our understanding of the universe and our place within it.",
+    name: "Extraterrestrial",
+    description: "A Extraterrestrial category discussion is a conversation that centers on topics related to extraterrestrial life and unidentified flying objects. Participants in this discussion may discuss reported sightings of UFOs, share personal experiences or theories about possible alien visitations, or explore the scientific and philosophical implications of the existence of intelligent life beyond our planet. The discussion may also delve into government secrecy and cover-up theories surrounding UFO sightings and encounters. This type of discussion can be both intriguing and controversial, inviting individuals to consider the possibilities of what lies beyond our planet and challenging our understanding of the universe and our place within it.",
     url: "https://images.pexels.com/photos/586030/pexels-photo-586030.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
   {

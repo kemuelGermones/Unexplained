@@ -1,5 +1,5 @@
 <% for (let category of categories) { %> 
-  <% if (originalUrl === ("/reports?category=" + category.name)) { %>
+  <% if (originalUrl === `/reports?category=${category.name}`) { %>
     <div class="w-100" style="
         height: 13rem;
         background-image: url('<%= category.url %>');
