@@ -1,16 +1,17 @@
 <% for (let category of categories) { %> 
-<% if (currentCategory === category.name) { %>
-<div class="w-100" style="
-    height: 13rem;
-    background-image: url('<%= category.url %>');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-  "></div>
-<div class="w-100 py-2 bg-white">
-  <div class="container-xl">
-    <h2><%= category.name %></h2>
-    <div><%= category.description %></div>
-  </div>
-</div>
-<% } %> <% } %>
+  <% if (originalUrl === `/reports?category=${category.name}`) { %>
+    <div class="w-100" style="
+        height: 13rem;
+        background-image: url('<%= category.url %>');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      "></div>
+    <div class="w-100 py-2 bg-white">
+      <div class="container-xl">
+        <h2><%= category.name %></h2>
+        <div><%= category.description %></div>
+      </div>
+    </div>
+  <% } %> 
+<% } %>

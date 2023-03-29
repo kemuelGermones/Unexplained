@@ -128,8 +128,8 @@ passport.deserializeUser(User.deserializeUser());
 // Set variables accessible to templates
 
 app.use((req, res, next) => {
+  res.locals.originalUrl = req.originalUrl;
   res.locals.categories = categories;
-  res.locals.currentCategory = req.query.category;
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
