@@ -1,6 +1,6 @@
 # Unexplained
 
-Developed an online forum web application utilizing Node.js, Express, and MongoDB. Facilitated user engagement through discussions, comments, and effective communication on various topics.
+This online forum web application facilitates user communication through the posting of messages and participation in discussions pertaining to a wide range of topics, such as sightings of paranormal entities, UFOs, the potential existence of extraterrestrial life, and other inexplicable phenomena.
 
 ### [Live Site](https://unexplained.vercel.app/)
 
@@ -8,7 +8,7 @@ Developed an online forum web application utilizing Node.js, Express, and MongoD
 
 ### Description
 
-This online forum web application facilitates user communication through the posting of messages and participation in discussions pertaining to a wide range of topics, such as sightings of paranormal entities, UFOs, the potential existence of extraterrestrial life, and other inexplicable phenomena.
+Developed an online forum web application utilizing Node.js, Express, and MongoDB. Facilitated user engagement through discussions, comments, and effective communication on various topics.
 
 ### Requirements
 
