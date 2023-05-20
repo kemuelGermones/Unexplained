@@ -1,6 +1,6 @@
 # Unexplained
 
-This is an online forum web application that enables users to communicate with each other by posting messages and engaging in discussions on various topics like sightings of paranormal entities, UFOs, the possibility of extraterrestrial life and other strange events that cannot be explain.
+Developed an online forum web application utilizing Node.js, Express, and MongoDB. Facilitated user engagement through discussions, comments, and effective communication on various topics.
 
 ### [Live Site](https://unexplained.vercel.app/)
 
@@ -8,7 +8,7 @@ This is an online forum web application that enables users to communicate with e
 
 ### Description
 
-Unexplained is an online forum web application built with Node.js, Express and MongoDB that enables users to communicate with each other by posting messages and engaging in discussions on various topics.
+This online forum web application facilitates user communication through the posting of messages and participation in discussions pertaining to a wide range of topics, such as sightings of paranormal entities, UFOs, the potential existence of extraterrestrial life, and other inexplicable phenomena.
 
 ### Requirements
 
@@ -17,7 +17,7 @@ Unexplained is an online forum web application built with Node.js, Express and M
 
 ### Usage
 
-Navigate to the URL provided above to visit the live demo. Alternatively, if you want to host the web app locally on your computer, make sure to follow the instructions below and add your own local environment variables.
+To access the live demo, please proceed to the provided URL. Alternatively, if you prefer to host the web application locally on your computer, follow the instructions outlined below.
 
 Clone it
 
@@ -47,4 +47,4 @@ Open http://localhost:3000 and enjoy!
 
 ### Future Plans
 
-- Make it responsive
+- Re-design it
