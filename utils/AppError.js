@@ -1,7 +1,8 @@
+// Extends the error class to have 
+// a status field
 class AppError extends Error {
   constructor(message, status) {
-    super();
-    this.message = message;
+    super(message);
     this.status = status;
   }
 }

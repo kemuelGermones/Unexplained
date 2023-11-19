@@ -1,25 +1,25 @@
-<% layout('layout/report') %>
+<% layout('layout/post') %>
 <div class="card">
   <div class="card-header bg-secondary text-light">Edit Post</div>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">
-      <form action="/reports/<%= report._id %>?_method=PUT" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
+      <form action="/posts/<%= post._id %>?_method=PUT" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
-          <input type="text" class="form-control" id="title" placeholder="Title" name="report[title]" value="<%= report.title %>" required />
+          <input type="text" class="form-control" id="title" placeholder="Title" name="post[title]" value="<%= post.title %>" required />
           <div class="valid-feedback">Looks good!</div>
         </div>
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
-          <textarea class="form-control" id="description" name="report[description]" rows="5" required><%= report.description %>
+          <textarea class="form-control" id="description" name="post[description]" rows="5" required><%= post.description %>
           </textarea>
           <div class="valid-feedback">Looks good!</div>
         </div>
         <div class="mb-3">
           <label for="category" class="form-label">Category</label>
-          <select class="form-select" id="category" aria-label="Default select example" name="report[category]" required>
+          <select class="form-select" id="category" aria-label="Default select example" name="post[category]" required>
             <% for (let category of categories) { %>
-            <option value="<%= category.name %>" <%= category.name === report.category ? 'selected' : '' %>>
+            <option value="<%= category.name %>" <%= category.name === post.category ? 'selected' : '' %>>
               <%= category.name %>
             </option>
             <% } %>
@@ -30,15 +30,15 @@
           <label for="formFileMultiple" class="form-label">
             Add Image
           </label>
-          <input class="form-control" type="file" id="formFileMultiple" name="image" multiple />
+          <input class="form-control" type="file" id="formFileMultiple" name="images" multiple />
         </div>
-        <% if (report.images.length) { %>
+        <% if (post.images.length) { %>
         <div class="mb-3">
           <label>Select to Delete Image</label>
           <div class="d-flex flex-column mt-2">
-            <% report.images.forEach((img, i)=> { %>
+            <% post.images.forEach((img, i)=> { %>
             <div class="form-check-inline">
-              <input type="checkbox" id="img-<%= i %>" name="deleteImages[]" value="<%= img.filename %>" />
+              <input type="checkbox" id="img-<%= i %>" name="images[]" value="<%= img.filename %>" />
               <img src="<%= img.url %>" class="img-thumbnail" style="width: 10rem" alt="" />
             </div>
             <% }) %>

@@ -1,24 +1,30 @@
 const express = require("express");
-const router = express.Router({ mergeParams: true });
-const comment = require("../controllers/comment");
-const {
-  validateComment,
-  isLoggedIn,
-  isCommentAuthor,
-} = require("../middleware");
 const wrapAsync = require("../utils/wrapAsync");
+const { createComment, deleteComment } = require("../controllers/comment");
+const { isLoggedIn } = require("../middlewares/auth");
+const {
+  validatePostExistence,
+  validateCommentBody,
+  validateCommentExistence,
+  validateCommentOwner,
+} = require("../middlewares/validate");
 
-// Create comment route
+const router = express.Router({ mergeParams: true });
 
-router.post("/", isLoggedIn, validateComment, wrapAsync(comment.createComment));
-
-// Delete comment route
+router.post(
+  "/",
+  isLoggedIn,
+  validatePostExistence,
+  validateCommentBody,
+  wrapAsync(createComment)
+);
 
 router.delete(
   "/:commentId",
   isLoggedIn,
-  isCommentAuthor,
-  wrapAsync(comment.deleteComment)
+  validateCommentExistence,
+  validateCommentOwner,
+  wrapAsync(deleteComment)
 );
 
 module.exports = router;

@@ -1,15 +1,20 @@
 const express = require("express");
-const router = express.Router();
-const user = require("../controllers/user");
-const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
-const { isLoggedIn } = require("../middleware");
+const wrapAsync = require("../utils/wrapAsync");
+const { isLoggedIn } = require("../middlewares/auth");
+const { validateUserExistence } = require("../middlewares/validate");
+const {
+  renderLoginPage,
+  renderSignupPage,
+  renderProfilePage,
+  loginUser,
+  signupUser,
+  logoutUser,
+} = require("../controllers/user");
 
-// Render login page route
+const router = express.Router();
 
-router.get("/", user.renderLoginForm);
-
-// login user route
+router.get("/", renderLoginPage);
 
 router.post(
   "/login",
@@ -18,23 +23,20 @@ router.post(
     failureRedirect: "/",
     keepSessionInfo: true,
   }),
-  user.loginUser
+  loginUser
 );
 
-// Render signup page route
+router.get("/signup", renderSignupPage);
 
-router.get("/signup", user.renderSignupForm);
+router.post("/signup", signupUser);
 
-// Register user route
+router.get("/logout", logoutUser);
 
-router.post("/signup", wrapAsync(user.signupUser));
-
-// Logout user route
-
-router.get("/logout", user.logoutUser);
-
-// Render profile page route
-
-router.get("/profile/:id", isLoggedIn, wrapAsync(user.profile));
+router.get(
+  "/profile/:userId",
+  isLoggedIn,
+  validateUserExistence,
+  wrapAsync(renderProfilePage)
+);
 
 module.exports = router;

@@ -1,47 +1,19 @@
-const BaseJoi = require("joi");
-const sanitizeHtml = require("sanitize-html");
+const extension = require("./configs/joi");
+const Joi = require("joi").extend(extension);
 
-// Adds a escapeHTML method to joi and checks if the
-// a input contains HTML elements
-
-const extension = (joi) => ({
-  type: "string",
-  base: joi.string(),
-  messages: {
-    "string.escapeHTML": "{{#label}} must not include HTML!",
-  },
-  rules: {
-    escapeHTML: {
-      validate(value, helpers) {
-        const clean = sanitizeHtml(value, {
-          allowedTags: [],
-          allowedAttributes: {},
-        });
-        if (clean !== value)
-          return helpers.error("string.escapeHTML", { value });
-        return clean;
-      },
-    },
-  },
-});
-
-const Joi = BaseJoi.extend(extension);
-
-// Validates report inputs
-
-module.exports.reportSchema = Joi.object({
-  report: Joi.object({
-    title: Joi.string().escapeHTML().required(),
-    description: Joi.string().escapeHTML().required(),
-    category: Joi.string().escapeHTML().required(),
+module.exports.postSchema = Joi.object({
+  post: Joi.object({
+    title: Joi.string().label("Title").escapeHtml().required(),
+    description: Joi.string().label("Description").escapeHtml().required(),
+    category: Joi.string()
+      .label("Category")
+      .valid("paranormal", "extraterrestrial", "others")
+      .escapeHtml()
+      .required(),
   }).required(),
-  deleteImages: Joi.array(),
+  images: Joi.array().label("Images").items(Joi.string().label("Filename")),
 });
-
-// Validates comment input
 
 module.exports.commentSchema = Joi.object({
-  comment: Joi.object({
-    opinion: Joi.string().escapeHTML().required(),
-  }).required(),
+  opinion: Joi.string().label("Opinion").escapeHtml().required(),
 });

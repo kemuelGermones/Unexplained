@@ -14,7 +14,7 @@
   <ul class="list-group list-group-flush">
     <% for (let category of categories) { %>
     <li class="list-group-item d-grid gap-2">
-      <a class="btn <%= originalUrl === `/reports?category=${category.name}` ? 'btn-secondary' : 'btn-outline-secondary' %>" type="button" href="<%= `/reports?category=${category.name}` %>"><%= category.name %></a>
+      <a class="btn <%= originalUrl === `/posts?category=${category.name}` ? 'btn-secondary' : 'btn-outline-secondary' %>" type="button" href="<%= `/posts?category=${category.name}` %>"><%= category.name %></a>
     </li>
     <% } %>
   </ul>

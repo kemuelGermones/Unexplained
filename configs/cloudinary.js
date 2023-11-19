@@ -11,7 +11,12 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: "Unexplained",
-    allowedFormats: ["jpeg", "png", "jpg"],
+    allowed_formats: "jpeg, png, jpg",
+    transformation: [
+      {
+        height: 350,
+      },
+    ],
   },
 });
 
