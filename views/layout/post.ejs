@@ -11,6 +11,9 @@
 </head>
 
 <body class="bg-dark">
+  <!-- Flash -->
+  <%- include('../partials/flash.ejs') %>
+
   <!-- Nav Bar -->
   <%- include('../partials/navbar.ejs') %>
 
@@ -20,7 +23,6 @@
   <!-- Main Body -->
   <main class="container mt-3">
     <div class="row">
-      <%- include('../partials/flash.ejs') %>
       <div class="col-8"><%- body %></div>
       <div class="col-4"><%- include('../partials/footer.ejs') %></div>
     </div>

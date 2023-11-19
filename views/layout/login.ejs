@@ -12,6 +12,9 @@
 </head>
 
 <body class="d-flex flex-column vh-100">
+  <!-- Flash -->
+  <%- include('../partials/flash.ejs') %>
+
   <!-- Main Body -->
   <main class="container mt-5">
     <div class="row">
@@ -28,7 +31,6 @@
         <a class="btn btn-outline-light" href="/posts">View discussions</a>
       </div>
       <div class="col-5">
-        <%- include('../partials/flash.ejs') %>
         <div class="card bg-white bg-opacity-10">
           <div class="card-body"><%- body %></div>
         </div>
