@@ -2,11 +2,11 @@ const User = require("../models/user");
 const Post = require("../models/post");
 
 module.exports.renderLoginPage = (req, res, next) => {
-  res.render("users/login.ejs");
+  res.render("pages/login.ejs");
 };
 
 module.exports.renderSignupPage = (req, res, next) => {
-  res.render("users/signup.ejs");
+  res.render("pages/signup.ejs");
 };
 
 module.exports.renderProfilePage = async (req, res, next) => {
@@ -14,7 +14,7 @@ module.exports.renderProfilePage = async (req, res, next) => {
 
   const posts = await Post.find({ author: user._id }).populate("author");
 
-  res.render("users/profile.ejs", { user, posts });
+  res.render("pages/profile.ejs", { user, posts });
 };
 
 module.exports.signupUser = (req, res, next) => {

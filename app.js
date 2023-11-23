@@ -77,7 +77,7 @@ app.all("*", (req, res, next) => {
 
 app.use((err, req, res, next) => {
   const { status = 500, message = "Something Went Wrong" } = err;
-  res.status(status).render("error.ejs", { err });
+  res.status(status).render("pages/error.ejs", { err });
 });
 
 const PORT = process.env.PORT || 3000;

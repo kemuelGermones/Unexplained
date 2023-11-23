@@ -1,0 +1,62 @@
+<% layout('layouts/home') %>
+
+<div class="card">
+  <div class="card-header bg-dark text-white">Edit Post</div>
+  <form class="card-body needs-validation" action="/posts/<%= post._id %>?_method=PUT" method="POST" enctype="multipart/form-data" novalidate>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" placeholder="Title" name="post[title]" value="<%= post.title %>" required />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" name="post[description]" rows="5" required><%= post.description %>
+      </textarea>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" id="category" name="post[category]" required>
+        <% for (let category of categories) { %>
+        <option value="<%= category.name %>" <%= category.name === post.category ? 'selected' : '' %>>
+          <%= category.name[0].toUpperCase() + category.name.slice(1) %>
+        </option>
+        <% } %>
+      </select>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="mb-3">
+      <label for="formFileMultiple" class="form-label">
+        Add Images
+      </label>
+      <input class="form-control" type="file" id="formFileMultiple" name="images" multiple />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <% if (post.images.length) { %>
+    <div class="mb-3">
+      <label class="form-label">Delete Images</label>
+      <div id="carouselExampleControls" class="carousel slide bg-dark" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <% post.images.forEach((image, index)=> { %>
+          <div class="carousel-item position-relative <%= index === 0 ? 'active' : '' %>">
+            <input class="form-check-input position-absolute" style="top: 16px;right: 16px;z-index: 2;" type="checkbox" id="img-<%= index %>" name="images[]" value="<%= image.filename %>" />
+            <img src="<%= image.url %>" class="d-block mx-auto img-fluid" alt="..." />
+          </div>
+          <% }) %>
+        </div>
+        <% if (post.images.length > 1) { %>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <% } %>
+      </div>
+    </div>
+    <% } %>
+    <button class="btn btn-outline-dark w-100">Submit</button>
+  </form>
+</div>

@@ -7,17 +7,17 @@ module.exports.renderPostsPage = async (req, res, next) => {
 
   const posts = await Post.find(options).populate("author");
 
-  res.render("post/index.ejs", { posts });
+  res.render("pages/posts.ejs", { posts });
 };
 
 module.exports.renderCreatePostPage = (req, res, next) => {
-  res.render("post/new.ejs");
+  res.render("pages/createPost.ejs");
 };
 
 module.exports.renderEditPostPage = async (req, res, next) => {
   const { post } = res.locals;
 
-  res.render("post/edit.ejs", { post });
+  res.render("pages/editPost.ejs", { post });
 };
 
 module.exports.createPost = async (req, res, next) => {
@@ -39,7 +39,7 @@ module.exports.createPost = async (req, res, next) => {
 module.exports.getPost = async (req, res, next) => {
   const { post } = res.locals;
 
-  res.render("post/show.ejs", { post });
+  res.render("pages/post.ejs", { post });
 };
 
 module.exports.editPost = async (req, res, next) => {

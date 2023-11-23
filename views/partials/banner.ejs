@@ -1,17 +1,16 @@
-<% for (let category of categories) { %> 
-  <% if (originalUrl === `/posts?category=${category.name}`) { %>
-    <div class="w-100" style="
-        height: 13rem;
+<% for (let category of categories) { %>
+<% if (originalUrl === `/posts?category=${category.name}`) { %>
+<div style="
+        height: 10rem;
         background-image: url('<%= category.url %>');
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
       "></div>
-    <div class="w-100 py-2 bg-white">
-      <div class="container-xl">
-        <h2><%= category.name %></h2>
-        <div><%= category.description %></div>
-      </div>
-    </div>
-  <% } %> 
+<div class="w-100 py-2 bg-dark text-white">
+  <div class="container fs-1 fw-semibold">
+    <%= category.name[0].toUpperCase() + category.name.slice(1) %>
+  </div>
+</div>
+<% } %>
 <% } %>

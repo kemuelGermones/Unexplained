@@ -1,0 +1,37 @@
+<div class="card mb-3">
+  <div class="card-header bg-dark text-white">About</div>
+  <div class="card-body">
+    Unexplained is an online forum dedicated to the discussion of sightings of
+    paranormal entities, UFOs, the possibility of extraterrestrial life and
+    other strange events that cannot be explained.
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-header bg-dark text-white">Categories</div>
+  <ul class="list-group list-group-flush">
+    <% for (let category of categories) { %>
+    <li class="list-group-item">
+      <a class="btn w-100 <%= originalUrl === `/posts?category=${category.name}` ? 'btn-dark' : 'btn-outline-dark' %>" type="button" href="<%= `/posts?category=${category.name}` %>"><%= category.name[0].toUpperCase() + category.name.slice(1) %></a>
+    </li>
+    <% } %>
+  </ul>
+</div>
+
+<div class="card mb-3">
+  <div class="card-header bg-dark text-white">Rules</div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">1.Follow the standards of civility</li>
+    <li class="list-group-item">2.Posts must be on-topic</li>
+    <li class="list-group-item">3.No low effort posts or comments</li>
+    <li class="list-group-item">4.No duplicate posts</li>
+    <li class="list-group-item">5.No advertising</li>
+    <li class="list-group-item">6.No memes</li>
+  </ul>
+</div>
+
+<div class="card mb-3">
+  <div class="card-body">
+    Unexplained Inc &copy; 2022. All rights reserved.
+  </div>
+</div>

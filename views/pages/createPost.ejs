@@ -1,0 +1,33 @@
+<% layout('layouts/home') %>
+
+<div class="card">
+  <div class="card-header bg-dark text-white">Create Post</div>
+  <form class="card-body needs-validation" action="/posts" method="POST" enctype="multipart/form-data" novalidate>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" placeholder="Title" name="post[title]" required />
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" name="post[description]" rows="5" placeholder="Description" required></textarea>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" id="category" name="post[category]" required>
+        <% for (let category of categories) { %>
+        <option value="<%= category.name %>"><%= category.name[0].toUpperCase() + category.name.slice(1) %></option>
+        <% } %>
+      </select>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="mb-3">
+      <label for="formFileMultiple" class="form-label">
+        Images
+      </label>
+      <input class="form-control" type="file" id="formFileMultiple" name="images" multiple />
+    </div>
+    <button class="btn btn-outline-dark w-100">Submit</button>
+  </form>
+</div>
