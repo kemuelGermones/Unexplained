@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const wrapAsync = require("../utils/wrapAsync");
-const { isLoggedIn } = require("../middlewares/auth");
+const { isLoggedOut, isLoggedIn } = require("../middlewares/auth");
 const { validateUserExistence } = require("../middlewares/validate");
 const {
   renderLoginPage,
@@ -14,7 +14,7 @@ const {
 
 const router = express.Router();
 
-router.get("/", renderLoginPage);
+router.get("/", isLoggedOut, renderLoginPage);
 
 router.post(
   "/login",
@@ -26,7 +26,7 @@ router.post(
   loginUser
 );
 
-router.get("/signup", renderSignupPage);
+router.get("/signup", isLoggedOut, renderSignupPage);
 
 router.post("/signup", signupUser);
 

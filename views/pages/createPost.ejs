@@ -16,9 +16,9 @@
     <div class="mb-3">
       <label for="category" class="form-label">Category</label>
       <select class="form-select" id="category" name="post[category]" required>
-        <% for (let category of categories) { %>
-        <option value="<%= category.name %>"><%= category.name[0].toUpperCase() + category.name.slice(1) %></option>
-        <% } %>
+        <option value="paranormal">Paranormal</option>
+        <option value="extraterrestrial">Extraterrestrial</option>
+        <option value="others">Others</option>
       </select>
       <div class="valid-feedback">Looks good!</div>
     </div>
@@ -27,6 +27,7 @@
         Images
       </label>
       <input class="form-control" type="file" id="formFileMultiple" name="images" multiple />
+      <div class="valid-feedback">Looks good!</div>
     </div>
     <button class="btn btn-outline-dark w-100">Submit</button>
   </form>

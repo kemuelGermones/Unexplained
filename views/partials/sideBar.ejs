@@ -10,9 +10,9 @@
 <div class="card mb-3">
   <div class="card-header bg-dark text-white">Categories</div>
   <ul class="list-group list-group-flush">
-    <% for (let category of categories) { %>
+    <% for (let category of ["paranormal", "extraterrestrial", "others"]) { %>
     <li class="list-group-item">
-      <a class="btn w-100 <%= originalUrl === `/posts?category=${category.name}` ? 'btn-dark' : 'btn-outline-dark' %>" type="button" href="<%= `/posts?category=${category.name}` %>"><%= category.name[0].toUpperCase() + category.name.slice(1) %></a>
+      <a class="btn w-100 <%= originalUrl === `/posts?category=${category}` ? 'btn-dark' : 'btn-outline-dark' %>" type="button" href="<%= `/posts?category=${category}` %>"><%= category[0].toUpperCase() + category.slice(1) %></a>
     </li>
     <% } %>
   </ul>

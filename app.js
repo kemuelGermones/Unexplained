@@ -18,7 +18,6 @@ const postRoute = require("./routes/post");
 const commentRoute = require("./routes/comment");
 const userRoute = require("./routes/user");
 const AppError = require("./utils/AppError");
-const categories = require("./public/javascripts/categories");
 
 const app = express();
 
@@ -60,7 +59,6 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.originalUrl = req.originalUrl;
-  res.locals.categories = categories;
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
@@ -72,12 +70,12 @@ app.use("/posts", postRoute);
 app.use("/posts/:postId/comments", commentRoute);
 
 app.all("*", (req, res, next) => {
-  next(new AppError("Page Not Found", 404));
+  next(new AppError("Page not found", 404));
 });
 
 app.use((err, req, res, next) => {
   const { status = 500, message = "Something Went Wrong" } = err;
-  res.status(status).render("pages/error.ejs", { err });
+  res.status(status).render("pages/error.ejs", { message });
 });
 
 const PORT = process.env.PORT || 3000;

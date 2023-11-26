@@ -1,8 +1,22 @@
 module.exports.isLoggedIn = (req, res, next) => {
-  if (!req.isAuthenticated()) {
+  const isAuthenticated = req.isAuthenticated();
+
+  if (!isAuthenticated) {
     req.session.returnTo = req.originalUrl;
     req.flash("error", "You must be logged in");
-    return res.redirect("/");
+    res.redirect("/");
+    return;
+  }
+
+  next();
+};
+
+module.exports.isLoggedOut = (req, res, next) => {
+  const isAuthenticated = req.isAuthenticated();
+
+  if (isAuthenticated) {
+    res.redirect("/posts");
+    return;
   }
 
   next();

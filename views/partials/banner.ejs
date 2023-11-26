@@ -1,4 +1,4 @@
-<% for (let category of categories) { %>
+<% for (let category of [{ name: "paranormal", url: "https://images.pexels.com/photos/626164/pexels-photo-626164.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" }, { name: "extraterrestrial", url: "https://images.pexels.com/photos/586030/pexels-photo-586030.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" }, { name: "others", url: "https://images.pexels.com/photos/3375857/pexels-photo-3375857.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}]) { %>
 <% if (originalUrl === `/posts?category=${category.name}`) { %>
 <div style="
         height: 10rem;
