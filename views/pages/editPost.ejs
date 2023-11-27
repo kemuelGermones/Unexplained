@@ -17,9 +17,9 @@
     <div class="mb-3">
       <label for="category" class="form-label">Category</label>
       <select class="form-select" id="category" name="post[category]" required>
-        <option value="paranormal">Paranormal</option>
-        <option value="extraterrestrial">Extraterrestrial</option>
-        <option value="others">Others</option>
+        <% for (let category of ["paranormal", "extraterrestrial", "others"]) { %>
+        <option value="<%= category %>" <%= post.category === category ? "selected" : "" %>><%= category[0].toUpperCase() + category.slice(1) %></option>
+        <% } %>
       </select>
       <div class="valid-feedback">Looks good!</div>
     </div>
