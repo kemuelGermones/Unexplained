@@ -32,9 +32,9 @@
         </div>
       </div>
       <% if (currentUser && post.author.equals(currentUser)) { %>
-      <div>
-        <a class="btn btn-sm btn-outline-dark" href="/posts/<%= post._id %>/edit"><i class="bi bi-pencil"></i></a>
-        <form action="/posts/<%= post._id %>?_method=DELETE" method="POST" class="d-inline">
+      <div class="d-flex">
+        <a class="btn btn-sm btn-outline-dark me-2" href="/posts/<%= post._id %>/edit"><i class="bi bi-pencil"></i></a>
+        <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
           <button class="btn btn-sm btn-outline-dark"><i class="bi bi-trash"></i></button>
         </form>
       </div>
