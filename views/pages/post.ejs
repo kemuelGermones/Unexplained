@@ -48,6 +48,7 @@
   </div>
 </div>
 
+<% if (currentUser || post.comments.length) { %>
 <div class="card mb-3">
   <div class="card-header bg-dark text-white">Comments</div>
   <% if (currentUser) { %>
@@ -80,3 +81,4 @@
     <% } %>
   </ul>
 </div>
+<% } %>
