@@ -17,3 +17,9 @@ module.exports.postSchema = Joi.object({
 module.exports.commentSchema = Joi.object({
   opinion: Joi.string().label("Opinion").escapeHtml().required(),
 });
+
+module.exports.userSchema = Joi.object({
+  username: Joi.string().label("Username").escapeHtml().required(),
+  email: Joi.string().label("Email").email().escapeHtml().required(),
+  password: Joi.string().label("Password").required(),
+});

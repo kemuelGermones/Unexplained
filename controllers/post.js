@@ -7,7 +7,7 @@ module.exports.renderPostsPage = async (req, res, next) => {
 
   const posts = await Post.find(options).populate("author");
 
-  res.render("pages/posts.ejs", { posts });
+  res.status(200).render("pages/posts.ejs", { posts });
 };
 
 module.exports.renderCreatePostPage = (req, res, next) => {
@@ -17,7 +17,7 @@ module.exports.renderCreatePostPage = (req, res, next) => {
 module.exports.renderEditPostPage = async (req, res, next) => {
   const { post } = res.locals;
 
-  res.render("pages/editPost.ejs", { post });
+  res.status(200).render("pages/editPost.ejs", { post });
 };
 
 module.exports.createPost = async (req, res, next) => {
@@ -33,13 +33,13 @@ module.exports.createPost = async (req, res, next) => {
   await post.save();
 
   req.flash("success", "Successfully created a post");
-  res.redirect("/posts");
+  res.status(200).redirect("/posts");
 };
 
 module.exports.getPost = async (req, res, next) => {
   const { post } = res.locals;
 
-  res.render("pages/post.ejs", { post });
+  res.status(200).render("pages/post.ejs", { post });
 };
 
 module.exports.editPost = async (req, res, next) => {
@@ -64,7 +64,7 @@ module.exports.editPost = async (req, res, next) => {
   });
 
   req.flash("success", "Successfully edited a post");
-  res.redirect(`/posts/${post._id}`);
+  res.status(200).redirect(`/posts/${post._id}`);
 };
 
 module.exports.deletePost = async (req, res, next) => {
@@ -79,5 +79,5 @@ module.exports.deletePost = async (req, res, next) => {
   await post.deleteOne();
 
   req.flash("success", "Successfully deleted a post");
-  res.redirect("/posts");
+  res.status(200).redirect("/posts");
 };

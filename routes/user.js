@@ -2,7 +2,10 @@ const express = require("express");
 const passport = require("passport");
 const wrapAsync = require("../utils/wrapAsync");
 const { isLoggedOut, isLoggedIn } = require("../middlewares/auth");
-const { validateUserExistence } = require("../middlewares/validate");
+const {
+  validateUserBody,
+  validateUserExistence,
+} = require("../middlewares/validate");
 const {
   renderLoginPage,
   renderSignupPage,
@@ -28,7 +31,7 @@ router.post(
 
 router.get("/signup", isLoggedOut, renderSignupPage);
 
-router.post("/signup", signupUser);
+router.post("/signup", validateUserBody, signupUser);
 
 router.get("/logout", logoutUser);
 

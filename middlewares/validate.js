@@ -1,4 +1,4 @@
-const { postSchema, commentSchema } = require("../schemas");
+const { postSchema, commentSchema, userSchema } = require("../schemas");
 const Post = require("../models/post");
 const Comment = require("../models/comment");
 const User = require("../models/user");
@@ -17,7 +17,9 @@ module.exports.validatePostBody = (req, res, next) => {
 
   if (error) {
     const message = error.details[0].message;
-    throw new AppError(message, 400);
+    req.flash("error", message);
+    res.status(400).redirect("back");
+    return;
   }
 
   next();
@@ -69,11 +71,14 @@ module.exports.validatePostOwner = (req, res, next) => {
 };
 
 module.exports.validateCommentBody = (req, res, next) => {
+  const { post } = res.locals;
   const { error } = commentSchema.validate(req.body, OPTIONS);
 
   if (error) {
     const message = error.details[0].message;
-    throw new AppError(message, 400);
+    req.flash("error", message);
+    res.status(400).redirect(`/posts/${post._id}`);
+    return;
   }
 
   next();
@@ -101,6 +106,19 @@ module.exports.validateCommentOwner = (req, res, next) => {
 
   if (!comment.author.equals(_id)) {
     throw new AppError("You are not allowed to delete this comment", 400);
+  }
+
+  next();
+};
+
+module.exports.validateUserBody = (req, res, next) => {
+  const { error } = userSchema.validate(req.body, OPTIONS);
+
+  if (error) {
+    const message = error.details[0].message;
+    req.flash("error", message);
+    res.status(400).redirect("/signup");
+    return;
   }
 
   next();

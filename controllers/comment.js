@@ -12,7 +12,7 @@ module.exports.createComment = async (req, res, next) => {
   await post.updateOne({ $push: { comments: comment._id } });
 
   req.flash("success", "Successfully created a comment");
-  res.redirect(`/posts/${post._id}`);
+  res.status(200).redirect(`/posts/${post._id}`);
 };
 
 module.exports.deleteComment = async (req, res, next) => {
@@ -25,5 +25,5 @@ module.exports.deleteComment = async (req, res, next) => {
   await comment.deleteOne();
 
   req.flash("success", "Successfully deleted a comment");
-  res.redirect(`/posts/${postId}`);
+  res.status(200).redirect(`/posts/${postId}`);
 };

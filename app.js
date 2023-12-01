@@ -70,7 +70,7 @@ app.use("/posts", postRoute);
 app.use("/posts/:postId/comments", commentRoute);
 
 app.all("*", (req, res, next) => {
-  next(new AppError("Page not found", 404));
+  next(new AppError("Page not found", 400));
 });
 
 app.use((err, req, res, next) => {
